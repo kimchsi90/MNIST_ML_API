@@ -1,13 +1,8 @@
+from typing import Union
 from mlflow.tracking import MlflowClient
 
 
-def promote_model(model_name, version, stage):
-    # 등록된 모델의 스테이지를 변경(추후 사용될 수 있음)
-    client = MlflowClient()
-    client.transition_model_version_stage(name=model_name, version=version, stage=stage)
-
-
-def get_latest_registered_model_uri(model_name):
+def get_latest_registered_model_uri(model_name: str) -> str:
     # MLflow 클라이언트 생성
     client = MlflowClient()
 
@@ -20,7 +15,7 @@ def get_latest_registered_model_uri(model_name):
     return model_uri
 
 
-def get_registered_model_info(model_name):
+def get_registered_model_info(model_name: str) -> dict[str, Union[str, int, dict[str, str]]]:
     client = MlflowClient()
     info = {}
 
@@ -36,7 +31,7 @@ def get_registered_model_info(model_name):
     return info
 
 
-def parse_auto_logged_info(r):
+def parse_auto_logged_info(r) -> dict[str, Union[str, list[str], dict[str, Union[str, float]]]]:
     info = {}
     tags = {k: v for k, v in r.data.tags.items() if not k.startswith("mlflow.")}
     artifacts = [f.path for f in MlflowClient().list_artifacts(r.info.run_id, "model")]

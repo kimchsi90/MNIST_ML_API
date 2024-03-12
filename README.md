@@ -53,9 +53,8 @@ Python
 
 ### Description
 
-1. 모델 학습에 필요한 하이퍼파라미터(epoch 수, batch size)를 받아 MNIST 분류를 위한 딥러닝 모델을 학습한다.
-2. Mlflow 로컬 experiment tracking server에 metrics와 artifacts를 로깅한다.
-3. 학습이 완료되면 추적된 학습 정보를 반환한다.
+1. 이미지 파일을 받고, 가장 최근에 모델 레지스트리에 등록된 모델을 이용하여 숫자를 추론한다.
+2. 예측 결과를 반환한다.
 
 ### Parameters
 

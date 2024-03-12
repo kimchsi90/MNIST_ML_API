@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import onnxruntime as rt
 import mlflow
+from typing import Union
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from tensorflow.keras.callbacks import EarlyStopping
@@ -30,7 +31,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-def load_mnist_data():
+def load_mnist_data() -> np.ndarray:
     # MNIST 데이터 로드 및 normalize
     f = np.load("mnist.npz")
     train_X, train_Y, test_X, test_Y = f['x_train'], f['y_train'], f['x_test'], f['y_test']
@@ -46,7 +47,7 @@ def load_mnist_data():
 
 # API train 엔드포인트 정의
 @app.route("/train/", methods=["POST"])
-def train():
+def train() -> dict[str, Union[str, list[str], dict[str, Union[str, float]]]]:
     """
     입력받은 하이퍼파라미터(epochs, batch_size)를 기반으로 MNIST 분류를 위한 딥러닝 모델을 학습하고
     local experiment tracking server에 학습 metrics과 artifacts를 로깅하는 함수
@@ -76,6 +77,7 @@ def train():
         mlflow.tensorflow.autolog(disable=True)
 
         info = parse_auto_logged_info(mlflow.get_run(run_id=run.info.run_id))
+        
     return info
 
 
