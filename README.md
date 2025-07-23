@@ -11,10 +11,8 @@ Docker
 Python
 
 - Flask (API)
-- Tensorflow, ONNX, ONNXRuntime (Machine learning)
-
-Deep Learning
- - MLflow
+- Tensorflow, ONNX, ONNXRuntime (Deep Learning)
+- MLflow (Model Management)
 
 # API 명세서
 
