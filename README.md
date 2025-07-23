@@ -13,6 +13,9 @@ Python
 - Flask (API)
 - Tensorflow, ONNX, ONNXRuntime (Machine learning)
 
+Deep Learning
+ - MLflow
+
 # API 명세서
 
 ## 1. POST /train/{epochs, batch_size}
